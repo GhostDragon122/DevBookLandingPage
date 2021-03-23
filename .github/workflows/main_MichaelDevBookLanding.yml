@@ -1,13 +1,12 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy Python app to Azure Web App - MichaelDevBookLanding
+name: Build and deploy Python app to Azure Web App - michaeldevbooklanding
 
 on:
   push:
     branches:
       - main
-  workflow_dispatch:
 
 jobs:
   build-and-deploy:
@@ -30,6 +29,6 @@ jobs:
     - name: 'Deploy to Azure Web App'
       uses: azure/webapps-deploy@v2
       with:
-        app-name: 'MichaelDevBookLanding'
+        app-name: 'michaeldevbooklanding'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_27cfb8f4669b4b3cb5d70bb7d855fb56 }}
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_0f7b91d632f041db8eb76107ef7caa5a }}

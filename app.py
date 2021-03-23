@@ -14,6 +14,7 @@ def generate_names(numberofnames):
     return nlist
 
 namelist = generate_names(10)
+print(namelist)
 
 app = Flask(__name__)
 
@@ -21,4 +22,6 @@ app = Flask(__name__)
 def index():
     """Render home page"""
     return render_template("index.html", namelist=namelist)
+
+
     
