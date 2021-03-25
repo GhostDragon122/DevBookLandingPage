@@ -1,12 +1,9 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-
 name: Build and deploy Python app to Azure Web App - michaeldevbooklanding
 
 on:
   push:
     branches:
-      - main
+      - dev
 
 jobs:
   build-and-deploy:
@@ -14,6 +11,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@master
+    
+      
 
     - name: Set up Python version
       uses: actions/setup-python@v1
@@ -23,8 +22,23 @@ jobs:
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install flake8 pytest names
-      
+        pip install flake8 pytest names pylint
+        
+    - name: Pytest
+      run: |
+        pytest
+        
+    - name: Analysing the code with pylint
+      run: |
+        pylint `ls -R|grep .py$|xargs`
+        
+    - name: Lint with flake8
+      run: |
+        # stop the build if there are Python syntax errors or undefined names
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+        
     - name: Build using AppService-Build
       uses: azure/appservice-build@v2
       with:
